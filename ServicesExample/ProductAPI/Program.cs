@@ -3,10 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProductAPI.Infrastructure.Repositories.Interfaces;
 using ProductAPI.Infrastructure.Repositories;
+using ProductAPI.Application.Services.Interfaces;
+using ProductAPI.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
