@@ -6,4 +6,6 @@ public class Product : BaseEntity
     public virtual string? Description { get; set; }
     public virtual required decimal Price { get; set; }
     public virtual required int StockQuantity { get; set; }
+    public virtual required int CategoryId { get; set; }
+    public virtual required Category Category { get; set; }
 }

@@ -10,5 +10,8 @@ public class MapperProfile : Profile
     {
         CreateMap<ProductCreateUpdateDTO, Product>();
         CreateMap<Product, ProductReadDTO>();
+
+        CreateMap<CategoryCreateUpdateDTO, Category>();
+        CreateMap<Category, CategoryReadDTO>();
     }
 }
