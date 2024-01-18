@@ -82,4 +82,28 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
             return StatusCode(500, ex.Message);
         }
     }
+
+    [HttpPut]
+    public async Task<ActionResult<CategoryReadDTO?>> UpdateCategoryAsync(int categoryId, CategoryCreateUpdateDTO categoryUpdateDTO)
+    {
+        try
+        {
+            var category = await _categoryService.UpdateAsync(categoryId, categoryUpdateDTO);
+
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
 }
