@@ -111,10 +111,15 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     public async Task<ActionResult<bool>> DeleteCategoryAsync(int categoryId)
     {
         try
-        {//Preciso melhorar
-            await _categoryService.DeleteAsync(categoryId);
+        {
+            var isDeleted = await _categoryService.DeleteAsync(categoryId);
 
-            return Ok();
+            if (!isDeleted)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Category not deleted");
+            }
+
+            return Ok(isDeleted);
         }
         catch (ArgumentException ex)
         {

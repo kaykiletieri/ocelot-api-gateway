@@ -49,9 +49,8 @@ public class ProductService(IProductRepository productRepository, IMapper mapper
     public async Task<ProductReadDTO?> UpdateProductAsync(int productId, ProductCreateUpdateDTO productDTO)
     {
         var product = await _productRepository.GetActiveByIdAsync(productId) ?? throw new ArgumentException($"Product with id {productId} not found");
-        _mapper.Map(productDTO, product);
 
-        var updatedProduct = await _productRepository.UpdateAsync(product);
+        var updatedProduct = await _productRepository.UpdateAsync(_mapper.Map(productDTO, product));
         return updatedProduct is null
             ? throw new Exception($"Product with id {product.Id} not updated")
             : _mapper.Map<ProductReadDTO>(updatedProduct);
