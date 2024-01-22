@@ -13,7 +13,7 @@ public class CategoryMapping : IEntityTypeConfiguration<Category>
         builder.HasKey(x => x.Id);
         builder.Property(e => e.CreatedAt).HasColumnName("created_at");
         builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
-        builder.Property(e => e.DeletedAt).HasColumnName("is_deleted");
+        builder.Property(e => e.DeletedAt).HasColumnName("deleted_at");
         builder.Property(x => x.Name).HasColumnName("name");
         builder.Property(x => x.Description).HasColumnName("description");
     }
