@@ -6,10 +6,16 @@ using ProductAPI.Infrastructure.Repositories.Interfaces;
 
 namespace ProductAPI.Application.Services;
 
-public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryService
+public class CategoryService : ICategoryService
 {
-    private readonly ICategoryRepository _categoryRepository = categoryRepository;
-    private readonly IMapper _mapper = mapper;
+    private readonly ICategoryRepository _categoryRepository;
+    private readonly IMapper _mapper;
+
+    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+    {
+        _categoryRepository = categoryRepository;
+        _mapper = mapper;
+    }
 
     public async Task<IEnumerable<CategoryReadDTO>?> GetAllAsync()
     {
@@ -49,7 +55,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
     public async Task<CategoryReadDTO?> UpdateAsync(int id, CategoryCreateUpdateDTO categoryUpdateDTO)
     {
         var category = await _categoryRepository.GetActiveByIdAsync(id) ?? throw new ArgumentException($"Category with id {id} not found");
-        
+
         var updatedCategory = await _categoryRepository.UpdateAsync(_mapper.Map(categoryUpdateDTO, category));
         return updatedCategory is null
             ? throw new Exception($"Category with id {category.Id} not updated")

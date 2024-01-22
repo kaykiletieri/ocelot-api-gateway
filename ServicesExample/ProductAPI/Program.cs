@@ -1,10 +1,10 @@
 using ProductAPI.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProductAPI.Infrastructure.Repositories.Interfaces;
 using ProductAPI.Infrastructure.Repositories;
 using ProductAPI.Application.Services.Interfaces;
 using ProductAPI.Application.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +15,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-var connectionString = builder.Configuration["DefaultConnection"];
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    options.UseSqlite("Data Source=app.db");
 });
 
 builder.Services.AddControllers();

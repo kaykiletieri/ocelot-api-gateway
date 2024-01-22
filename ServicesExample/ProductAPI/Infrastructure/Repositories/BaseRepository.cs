@@ -4,10 +4,16 @@ using ProductAPI.Infrastructure.Repositories.Interfaces;
 
 namespace ProductAPI.Infrastructure.Repositories;
 
-public abstract class BaseRepository<T>(ApplicationDbContext context) : IBaseRepository<T> where T : BaseEntity
+public abstract class BaseRepository<T>: IBaseRepository<T> where T : BaseEntity
 {
-    protected readonly ApplicationDbContext _context = context;
-    protected readonly DbSet<T> _dbSet = context.Set<T>();
+    protected readonly ApplicationDbContext _context;
+    protected readonly DbSet<T> _dbSet;
+
+    public BaseRepository(ApplicationDbContext context)
+    {
+        this._context = context;
+        this._dbSet = _context.Set<T>();
+    }
 
     public async Task<IEnumerable<T?>> GetAllAsync()
     {

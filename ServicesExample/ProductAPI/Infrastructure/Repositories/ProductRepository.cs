@@ -4,8 +4,12 @@ using ProductAPI.Infrastructure.Repositories.Interfaces;
 
 namespace ProductAPI.Infrastructure.Repositories;
 
-public class ProductRepository(ApplicationDbContext context) : BaseRepository<Product>(context), IProductRepository
+public class ProductRepository : BaseRepository<Product>, IProductRepository
 {
+    public ProductRepository(ApplicationDbContext context) : base(context)
+    {
+    }
+
     public async Task<IEnumerable<Product?>> GetByCategoryIdAsync(int categoryId)
     {
         try

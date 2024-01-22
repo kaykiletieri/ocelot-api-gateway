@@ -6,10 +6,14 @@ namespace ProductAPI.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-public class CategoryController(ICategoryService categoryService) : ControllerBase
+public class CategoryController : ControllerBase
 {
+    private readonly ICategoryService _categoryService;
 
-    private readonly ICategoryService _categoryService = categoryService;
+    public CategoryController(ICategoryService categoryService)
+    {
+        _categoryService = categoryService;
+    }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CategoryReadDTO>?>> GetCategoriesAsync()

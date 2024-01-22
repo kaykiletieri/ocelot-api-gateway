@@ -6,10 +6,16 @@ using ProductAPI.Infrastructure.Repositories.Interfaces;
 
 namespace ProductAPI.Application.Services;
 
-public class ProductService(IProductRepository productRepository, IMapper mapper) : IProductService
+public class ProductService : IProductService
 {
-    private readonly IProductRepository _productRepository = productRepository;
-    private readonly IMapper _mapper = mapper;
+    private readonly IProductRepository _productRepository;
+    private readonly IMapper _mapper;
+
+    public ProductService(IProductRepository productRepository, IMapper mapper)
+    {
+        _productRepository = productRepository;
+        _mapper = mapper;
+    }
 
     public async Task<IEnumerable<ProductReadDTO>?> GetProductsAsync()
     {

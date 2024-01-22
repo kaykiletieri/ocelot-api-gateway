@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProductAPI.Application.DTOs;
 using ProductAPI.Application.Services.Interfaces;
 
@@ -7,9 +6,14 @@ namespace ProductAPI.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-public class ProductController(IProductService productService) : ControllerBase
+public class ProductController : ControllerBase
 {
-    private readonly IProductService _productService = productService;
+    private readonly IProductService _productService;
+
+    public ProductController(IProductService productService)
+    {
+        _productService = productService;
+    }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductReadDTO>?>> GetProductsAsync()
