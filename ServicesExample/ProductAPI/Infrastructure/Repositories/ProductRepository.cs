@@ -22,7 +22,7 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
         }
     }
 
-    public async Task<Product?> GetByNameAsync(string name)
+    public async Task<Product?> GetActiveByNameAsync(string name)
     {
         try
         {

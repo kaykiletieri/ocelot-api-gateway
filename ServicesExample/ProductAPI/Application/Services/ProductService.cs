@@ -41,6 +41,18 @@ public class ProductService : IProductService
         return _mapper.Map<ProductReadDTO>(product);
     }
 
+    public async Task<ProductReadDTO?> GetProductByNameAsync(string name)
+    {
+        var product = await _productRepository.GetActiveByNameAsync(name);
+
+        if (product is null)
+        {
+            return null;
+        }
+
+        return _mapper.Map<ProductReadDTO>(product);
+    }
+
     public async Task<ProductReadDTO?> CreateProductAsync(ProductCreateUpdateDTO productDTO)
     {
         var product = _mapper.Map<Product>(productDTO);

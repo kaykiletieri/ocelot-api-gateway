@@ -6,5 +6,5 @@ public interface IProductRepository : IBaseRepository<Product>
 {
     Task<IEnumerable<Product?>> GetByCategoryIdAsync(int categoryId);
 
-    Task<Product?> GetByNameAsync(string name);
+    Task<Product?> GetActiveByNameAsync(string name);
 }
