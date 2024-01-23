@@ -21,4 +21,16 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
             throw new Exception($"An error occurred while getting {typeof(Product).Name} by category id.", ex);
         }
     }
+
+    public async Task<Product?> GetByNameAsync(string name)
+    {
+        try
+        {
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Name == name && x.DeletedAt == null);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"An error occurred while getting {typeof(Product).Name} by name.", ex);
+        }
+    }
 }

@@ -39,7 +39,7 @@ public class CategoryController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpGet("{categoryId:int}")]
     public async Task<ActionResult<CategoryReadDTO?>> GetCategoryByIdAsync(int categoryId)
     {
         try
