@@ -1,17 +1,9 @@
 using ProductAPI.Infrastructure;
 using Microsoft.OpenApi.Models;
-using ProductAPI.Infrastructure.Repositories.Interfaces;
-using ProductAPI.Infrastructure.Repositories;
-using ProductAPI.Application.Services.Interfaces;
-using ProductAPI.Application.Services;
 using Microsoft.EntityFrameworkCore;
+using ProductAPI.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -20,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=app.db");
 });
 
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
