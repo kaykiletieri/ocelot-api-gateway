@@ -17,6 +17,12 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Application\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Infrastructure\Extensions\" />
+    <Folder Include="Infrastructure\Mappers\" />
+    <Folder Include="Infrastructure\Mappings\" />
+    <Folder Include="Infrastructure\Repositories\" />
   </ItemGroup>
 
 </Project>
